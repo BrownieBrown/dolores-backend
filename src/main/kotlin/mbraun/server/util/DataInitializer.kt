@@ -10,7 +10,7 @@ import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 
-@Profile("test")
+@Profile("default", "test")
 @Component
 class DataInitializer(
     val userRepository: UserRepository,

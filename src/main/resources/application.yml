@@ -5,13 +5,13 @@ spring:
     activate:
       on-profile: localhost, default
   datasource:
-    url: jdbc:postgresql://localhost:5432/dolores
-    username: mbraun
-    password: D-PkgT_3GV-xGMjwF7TqPAFG
+    url: ${env.POSTGRES_URL}
+    username: ${env.POSTGRES_USERNAME}
+    password: ${env.POSTGRES_PASSWORD}
   jpa:
     database: postgresql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
@@ -24,9 +24,9 @@ spring:
     activate:
       on-profile: test
   datasource:
-    url: jdbc:postgresql://localhost:5432/dolores
-    username: mbraun
-    password: D-PkgT_3GV-xGMjwF7TqPAFG
+    url: ${env.POSTGRES_URL}
+    username: ${env.POSTGRES_USERNAME}
+    password: ${env.POSTGRES_PASSWORD}
   jpa:
     database: postgresql
     hibernate:
@@ -42,7 +42,6 @@ spring:
   config:
     activate:
       on-profile: docker
-  datasource:
   jpa:
     database: postgresql
     hibernate:
@@ -59,9 +58,9 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/dolores
-    username: mbraun
-    password: D-PkgT_3GV-xGMjwF7TqPAFG
+    url: ${env.POSTGRES_URL}
+    username: ${env.POSTGRES_USERNAME}
+    password: ${env.POSTGRES_PASSWORD}
   jpa:
     database: postgresql
     hibernate:
