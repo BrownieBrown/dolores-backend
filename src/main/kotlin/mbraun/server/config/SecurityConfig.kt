@@ -19,6 +19,7 @@ class SecurityConfig {
         http.authorizeRequests()
             .mvcMatchers("/").permitAll()
             .mvcMatchers("/signUp").permitAll()
+            .mvcMatchers("/signIn").permitAll()
             .mvcMatchers("/user").hasRole("ADMIN")
             .and()
             .formLogin().loginPage("/signIn")

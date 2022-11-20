@@ -36,6 +36,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.security:spring-security-test")
     implementation("me.paulschwarz:spring-dotenv:2.5.4")
+    implementation("io.ktor:ktor-server-auth:1.6.8")
+    implementation("io.ktor:ktor-server-auth-jwt:1.3.2-1.4-M2")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
