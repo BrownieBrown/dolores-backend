@@ -8,12 +8,14 @@ import mbraun.server.model.User
 import mbraun.server.repository.RoleRepository
 import mbraun.server.repository.UserRepository
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import org.springframework.http.HttpStatus
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.server.ResponseStatusException
 import java.util.UUID
 
@@ -467,6 +469,40 @@ internal class UserServiceTest {
             // then
             assertEquals(HttpStatus.CONFLICT, exception.status)
             assertEquals("The user with email: ${user.email} does not posses this role.", exception.reason)
+        }
+    }
+
+    @Nested
+    @DisplayName("comparePassword()")
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    inner class ComparePassword {
+
+        @Test
+        fun `returns true when passwords are the same`() {
+            // given
+            val password = "password"
+            val hashedPassword = BCryptPasswordEncoder().encode(password)
+
+            // when
+            val result = userService.comparePassword(password, hashedPassword)
+
+            // then
+            assertTrue(result)
+        }
+
+        @Test
+        fun `returns false when passwords are different`() {
+            // given
+            val invalidPassword = "invalidPassword"
+            val hashedPassword = BCryptPasswordEncoder().encode("password")
+
+            // when
+            val exception =
+                assertThrows<ResponseStatusException> { userService.comparePassword(invalidPassword, hashedPassword) }
+
+            // then
+            assertEquals(HttpStatus.BAD_REQUEST, exception.status)
+            assertEquals("The entered password is incorrect.", exception.reason)
         }
     }
 }

@@ -8,6 +8,7 @@ import mbraun.server.service.UserService
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Profile
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
 
 @Profile("default", "test")
@@ -44,32 +45,32 @@ class DataInitializer(
             User(
                 email = "marco.braun2013@gmail.com",
                 fullName = "Marco Braun",
-                password = "1234"
+                password = BCryptPasswordEncoder().encode("1234")
             ),
             User(
                 email = "yannick.seppich@gmx.de",
                 fullName = "Yannick Seppich",
-                password = "1234"
+                password = BCryptPasswordEncoder().encode("1234")
             ),
             User(
                 email = "rainer.dirkmann@icloud.com",
                 fullName = "Rainer Dirkmann",
-                password = "1234"
+                password = BCryptPasswordEncoder().encode("1234")
             ),
             User(
                 email = "miriam.hansel@yahoo.com",
                 fullName = "Miriam Hansel",
-                password = "1234"
+                password = BCryptPasswordEncoder().encode("1234")
             ),
             User(
                 email = "josephin.wolf@icloud.com",
                 fullName = "Josehphin Wolf",
-                password = "1234"
+                password = BCryptPasswordEncoder().encode("1234")
             ),
             User(
                 email = "manuel.engelmann@gmail.com",
                 fullName = "Manuel Engelmann",
-                password = "1234"
+                password = BCryptPasswordEncoder().encode("1234")
             ),
         )
 

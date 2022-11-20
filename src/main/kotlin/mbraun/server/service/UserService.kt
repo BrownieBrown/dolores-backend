@@ -4,6 +4,7 @@ import mbraun.server.model.User
 import mbraun.server.repository.RoleRepository
 import mbraun.server.repository.UserRepository
 import org.springframework.http.HttpStatus
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
@@ -99,5 +100,17 @@ class UserService(private val userRepository: UserRepository, private val roleRe
 
         user.roles.remove(role)
         return userRepository.save(user)
+    }
+
+    fun comparePassword(enteredPassword: String, hashedPassword: String): Boolean {
+        val matches = BCryptPasswordEncoder().matches(enteredPassword, hashedPassword)
+
+        if (!matches) {
+            throw ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "The entered password is incorrect."
+            )
+        }
+        return true
     }
 }

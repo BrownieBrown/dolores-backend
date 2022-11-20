@@ -17,8 +17,8 @@ data class User(
     @GeneratedValue
     val id: UUID = UUID.randomUUID(),
     var email: String = "",
-    var fullName: String = "",
     var password: String = "",
+    var fullName: String = "",
     val createdAt: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
     @ManyToMany(fetch = FetchType.EAGER)
     var roles: MutableList<Role> = arrayListOf()
